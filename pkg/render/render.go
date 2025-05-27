@@ -42,7 +42,7 @@ func CreateTemplateCache() (map[string]*template.Template, error){
 
 	for _,page := range pages {
 		name:= filepath.Base(page)
-		ts,er :=template.New(name).ParseFiles(page)
+		ts, er := template.New(name).ParseFiles("./template/base.html", page)
 
 		if er!=nil {
 			return mycache,er

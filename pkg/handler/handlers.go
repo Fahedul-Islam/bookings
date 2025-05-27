@@ -42,3 +42,8 @@ func (m *Reposotory)About(w http.ResponseWriter, r *http.Request){
 
 	})
 }
+func (m *Reposotory)Generals(w http.ResponseWriter, r *http.Request){
+	render.RenederTemplate(w,"generals.html",&models.TemplateData{
+
+	})
+}
