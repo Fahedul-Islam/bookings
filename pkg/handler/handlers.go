@@ -42,8 +42,39 @@ func (m *Reposotory)About(w http.ResponseWriter, r *http.Request){
 
 	})
 }
+// Generals is the handler for the generals quarters page
+// it renders the generals-quarters template
+// this is where the user can see the generals quarters
 func (m *Reposotory)Generals(w http.ResponseWriter, r *http.Request){
 	render.RenederTemplate(w,"generals.html",&models.TemplateData{
 
+	})
+}
+// Major is the handler for the majors page
+// it renders the majors template
+// this is where the user can see the majors
+func (m *Reposotory)Major(w http.ResponseWriter, r *http.Request){
+	render.RenederTemplate(w,"majors.html",&models.TemplateData{
+	})
+}
+// BookNow is the handler for the search availability page
+// it renders the search-availability template
+// it is used to search for available rooms
+func (m *Reposotory)BookNow(w http.ResponseWriter, r *http.Request){
+	render.RenederTemplate(w,"search-availability.html",&models.TemplateData{
+	})
+}
+// MakeReservation is the handler for the make reservation page
+// it renders the make-reservation template
+// this is where the user can make a reservation
+func (m *Reposotory)MakeReservation(w http.ResponseWriter, r *http.Request){
+	render.RenederTemplate(w,"make-reservation.html",&models.TemplateData{
+	})
+}
+// Contact is the handler for the contact page
+// it renders the contact template
+// this is where the user can contact us
+func (m *Reposotory)Contact(w http.ResponseWriter, r *http.Request){
+	render.RenederTemplate(w,"contact.html",&models.TemplateData{
 	})
 }
