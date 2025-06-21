@@ -32,13 +32,13 @@ func (m *Reposotory)Home(w http.ResponseWriter, r *http.Request){
 	data:= make(map[string]string)
 	data["test"]="got the data"
 	data["remote_ip"]=remoteIP
-	render.RenederTemplate(w,"home.html", &models.TemplateData{
+	render.RenederTemplate(w,r,"home.html", &models.TemplateData{
 		StringMap: data,
 	})
 }
 
 func (m *Reposotory)About(w http.ResponseWriter, r *http.Request){
-	render.RenederTemplate(w,"about.html",&models.TemplateData{
+	render.RenederTemplate(w,r,"about.html",&models.TemplateData{
 
 	})
 }
@@ -46,7 +46,7 @@ func (m *Reposotory)About(w http.ResponseWriter, r *http.Request){
 // it renders the generals-quarters template
 // this is where the user can see the generals quarters
 func (m *Reposotory)Generals(w http.ResponseWriter, r *http.Request){
-	render.RenederTemplate(w,"generals.html",&models.TemplateData{
+	render.RenederTemplate(w,r,"generals.html",&models.TemplateData{
 
 	})
 }
@@ -54,27 +54,34 @@ func (m *Reposotory)Generals(w http.ResponseWriter, r *http.Request){
 // it renders the majors template
 // this is where the user can see the majors
 func (m *Reposotory)Major(w http.ResponseWriter, r *http.Request){
-	render.RenederTemplate(w,"majors.html",&models.TemplateData{
+	render.RenederTemplate(w,r,"majors.html",&models.TemplateData{
 	})
 }
-// BookNow is the handler for the search availability page
+// Availability is the handler for the search availability page
 // it renders the search-availability template
 // it is used to search for available rooms
-func (m *Reposotory)BookNow(w http.ResponseWriter, r *http.Request){
-	render.RenederTemplate(w,"search-availability.html",&models.TemplateData{
+func (m *Reposotory)Availability(w http.ResponseWriter, r *http.Request){
+	render.RenederTemplate(w,r,"search-availability.html",&models.TemplateData{
 	})
 }
+
+func (m *Reposotory)PostAvailability(w http.ResponseWriter, r *http.Request){
+	start:=r.FormValue("start")
+	end:=r.FormValue("end")
+	w.Write([]byte("Posted the availability from " + start + " to " + end))
+}
+
 // MakeReservation is the handler for the make reservation page
 // it renders the make-reservation template
 // this is where the user can make a reservation
 func (m *Reposotory)MakeReservation(w http.ResponseWriter, r *http.Request){
-	render.RenederTemplate(w,"make-reservation.html",&models.TemplateData{
+	render.RenederTemplate(w,r,"make-reservation.html",&models.TemplateData{
 	})
 }
 // Contact is the handler for the contact page
 // it renders the contact template
 // this is where the user can contact us
 func (m *Reposotory)Contact(w http.ResponseWriter, r *http.Request){
-	render.RenederTemplate(w,"contact.html",&models.TemplateData{
+	render.RenederTemplate(w,r,"contact.html",&models.TemplateData{
 	})
 }

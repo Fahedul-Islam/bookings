@@ -8,13 +8,19 @@ import (
 
 	"github.com/fahedul-islam/bookings/pkg/config"
 	"github.com/fahedul-islam/bookings/pkg/models"
+	"github.com/justinas/nosurf"
 )
 var app *config.AppConfig
 func NewTemplate(a *config.AppConfig) {
 	app=a
 }
 
-func RenederTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData){
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CSRFToken=nosurf.Token(r)
+	return td
+}
+
+func RenederTemplate(w http.ResponseWriter,r *http.Request, tmpl string, td *models.TemplateData){
 	var tc map[string]*template.Template
 	if app.UseCache {
 		tc=app.TemplateCache
@@ -25,7 +31,7 @@ func RenederTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData
 	if !ok {
 		log.Fatal(ok)
 	}
-
+	td=AddDefaultData(td,r)
 	er := t.Execute(w,td)
 	if er!=nil {
 		log.Fatal(er)
