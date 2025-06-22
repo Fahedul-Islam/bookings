@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/fahedul-islam/bookings/pkg/config"
@@ -71,6 +72,24 @@ func (m *Reposotory)PostAvailability(w http.ResponseWriter, r *http.Request){
 	w.Write([]byte("Posted the availability from " + start + " to " + end))
 }
 
+type JsonResponse struct {
+	OK      bool   `json:"ok"`
+	Message string `json:"message"`
+}
+
+func (m *Reposotory)AvailabilityJson(w http.ResponseWriter, r *http.Request){
+	resp := JsonResponse{
+		OK: true,
+		Message: "Available",
+	}
+	out, err := json.MarshalIndent(resp, "", "    ")
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(out)
+}
 // MakeReservation is the handler for the make reservation page
 // it renders the make-reservation template
 // this is where the user can make a reservation
